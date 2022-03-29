@@ -3,7 +3,7 @@ import time
 import websocket
 import json
 from src.resources import get_message
-from src.websocket.upbit_api import get_target_price
+from src.upbit.quotation_api import UpbitQuotationApi
 from src.main.model import get_active_users_info
 from src.telesk import Telesk
 import threading
@@ -22,6 +22,7 @@ class UpbitWebsocket:
         self._tickers = tickers
         self._telesk_app = telesk_app
         self._started = False
+        self.upbit_quotation_api = UpbitQuotationApi()
 
     def _on_message(self, ws, message):
         msg: dict = json.loads(message)
@@ -111,7 +112,7 @@ class UpbitWebsocket:
                 threading.Thread(target=buy_signal, daemon=True).start()
 
     def _set_target_price(self, ticker):
-        response = get_target_price(ticker)
+        response = self.upbit_quotation_api.get_target_price(ticker)
         if response.get('ok', False):
             self._target_prices[ticker] = response['target_price']
         else:

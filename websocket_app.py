@@ -11,7 +11,7 @@ else:
     logging.config.dictConfig(json.load(open('./logger.local.json')))
 
 app = Telesk()
-app.config['api_key'] = os.getenv('tele_key')
+app.config['api_key'] = os.getenv('cats_tele_key')
 ws = UpbitWebsocket(
     ['KRW-BTC', 'KRW-ETH', 'KRW-EOS', 'KRW-BCH'], telesk_app=app)
 

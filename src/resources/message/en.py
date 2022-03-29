@@ -7,7 +7,6 @@ en = {
     'com.yes': 'Yes',
     'com.no': 'No',
     'com.exit': 'Exit',
-    # HTML
     'start.default': 'Hello {name}!! This is a test version of cryptocurrency trade algorithm project.\n\nWe provide cryptocurrency trading strategy in real time. Subscribe to our service to take advantage of what we provide.',
     'start.request': 'Subscribe',
     'start.request.sent': 'Permission request has been sent to the admin. If the admin accept your request, you will be registered to our service.',

@@ -1,6 +1,7 @@
 import requests
 import datetime
 
+
 class UpbitQuotationApi:
     def __init__(self):
         pass
@@ -11,9 +12,8 @@ class UpbitQuotationApi:
 
         try:
             response = method(endpoint,
-                            data=kwargs.get('data', None),
-                            params=kwargs.get('params', {}),
-                            headers=kwargs.get('headers', None))
+                              params=kwargs.get('params', {}),
+                              headers={"Accept": "application/json"})
 
             data = response.json()
 
@@ -38,7 +38,6 @@ class UpbitQuotationApi:
                 'ok': False,
                 'description': str(e),
             }
-
 
     def _get_endpoint_ohlcv(self, interval):
         if interval in ["day", "days"]:
@@ -68,7 +67,6 @@ class UpbitQuotationApi:
 
         return endpoint
 
-
     def _get_ohlcv(self, ticker="KRW-BTC", interval="day", count=1):
 
         to = datetime.datetime.now(
@@ -76,11 +74,10 @@ class UpbitQuotationApi:
 
         endpoint = self._get_endpoint_ohlcv(interval)
 
-        headers = {"Accept": "application/json"}
-
         params = {"market": ticker, "count": count, "to": to}
 
-        response = self._request(requests.get, endpoint, params=params, headers=headers)
+        response = self._request(
+            requests.get, endpoint, params=params)
 
         if response.get('data') and to[:10] != response['data'][0]['candle_date_time_utc'][:10]:
             return {
@@ -89,7 +86,6 @@ class UpbitQuotationApi:
             }
 
         return response
-
 
     def get_target_price(self, ticker='KRW-BTC'):
         response = self._get_ohlcv(ticker=ticker, count=21)

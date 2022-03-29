@@ -13,7 +13,7 @@ else:
     logging.config.dictConfig(json.load(open('./logger.local.json')))
 
 app = Telesk()
-app.config['api_key'] = os.getenv('tele_key')
+app.config['api_key'] = os.getenv('cats_tele_key')
 app.config['commands'] = get_commands()
 app.config['allow_group'] = False
 app.register_blueprint(controller)

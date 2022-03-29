@@ -61,10 +61,11 @@ class Telesk(Scaffold):
             if msg_info:
                 is_group = msg_info['chat']['type'] == 'group'
 
-                self.logger.info(f'Message Received: {str(msg)}')
-
                 if is_group and not self.config['allow_group']:
+                    self.logger.info(f'Message Received (Disallowed by Group Message Config): {str(msg)}')
                     return
+
+                self.logger.info(f'Message Received: {str(msg)}')
 
                 text: str = msg_info.get('text', '')
                 chat_id = msg_info.get('chat', {}).get('id')

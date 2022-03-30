@@ -3,14 +3,15 @@ import time
 import websocket
 import json
 from src.resources import get_message
-from src.upbit.quotation_api import UpbitQuotationApi
+from src.upbit import upbit_quotation_api
 from src.main.model import get_active_users_info
-from src.telesk import Telesk
+from src.main.controller.base import controller
 import threading
+import logging
 
 
 class UpbitWebsocket:
-    def __init__(self, tickers: list, telesk_app: Telesk) -> None:
+    def __init__(self, tickers: list) -> None:
         self._tickers = tickers
         self._reset_time = datetime.datetime.now(datetime.timezone.utc).replace(
             hour=0, minute=0, second=0, microsecond=0)
@@ -20,27 +21,26 @@ class UpbitWebsocket:
                           for ticker in tickers}
         self._working = True
         self._tickers = tickers
-        self._telesk_app = telesk_app
         self._started = False
-        self.upbit_quotation_api = UpbitQuotationApi()
+        self.logger = logging.getLogger('websocket')
 
     def _on_message(self, ws, message):
         msg: dict = json.loads(message)
         self._process_message(msg)
 
     def _on_error(self, ws, error):
-        self._telesk_app.logger.error(error)
+        self.logger.error(error)
 
     def _on_close(self, ws, close_status_code, close_msg):
-        self._telesk_app.logger.info(
+        self.logger.info(
             f"Connection Lost: {{Close Code: {close_status_code}, Close Message: {close_msg}}}")
 
     def _on_open(self, ws):
         if self._started:
-            self._telesk_app.logger.info('Reconnect')
+            self.logger.info('Reconnect')
         else:
             self._started = True
-            self._telesk_app.logger.info('Upbit Websocket Start')
+            self.logger.info('Upbit Websocket Start')
         ws.send(json.dumps(
             [{"ticket": "test"}, {"type": "ticker", "codes": self._tickers}]))
 
@@ -56,7 +56,7 @@ class UpbitWebsocket:
                 ws.run_forever()
                 time.sleep(10)
         except KeyboardInterrupt:
-            self._telesk_app.logger.info('Upbit Websocket End')
+            self.logger.info('Upbit Websocket End')
             exit()
 
     def _process_message(self, msg):
@@ -88,10 +88,10 @@ class UpbitWebsocket:
                                 buy_price=buy_price,
                                 interest=interest
                             )
-                            self._telesk_app.logger.info(
+                            self.logger.info(
                                 f'Sell Signal: {{Ticker: {ticker}, Sell Price: {sell_price}, Buy Price: {buy_price}, Interest: {interest}}}')
                         time.sleep(0.5)
-                    self._telesk_app.logger.info(
+                    self.logger.info(
                         f'New Target Price: {self._target_prices}')
                     self._working = True
 
@@ -103,7 +103,7 @@ class UpbitWebsocket:
                 self._buy_sigs[ticker]['flag'] = True
 
                 def buy_signal():
-                    self._telesk_app.logger.info(
+                    self.logger.info(
                         f'Buy Signal: {{Ticker:{ticker}, Current Price:{curr_price}}}')
                     self._buy_sigs[ticker]['buy_price'] = curr_price
                     self._send_tele_message(
@@ -112,17 +112,17 @@ class UpbitWebsocket:
                 threading.Thread(target=buy_signal, daemon=True).start()
 
     def _set_target_price(self, ticker):
-        response = self.upbit_quotation_api.get_target_price(ticker)
+        response = upbit_quotation_api.get_target_price(ticker)
         if response.get('ok', False):
             self._target_prices[ticker] = response['target_price']
         else:
-            self._telesk_app.logger.error(response['description'])
+            self.logger.error(response['description'])
             time.sleep(5)
             self._set_target_price(ticker)
 
     def _send_tele_message(self, msg_code, **kwargs):
         users = get_active_users_info()
         for user in users:
-            msg_thread = threading.Thread(target=self._telesk_app.send_message, args=[
+            msg_thread = threading.Thread(target=controller.send_message, args=[
                                           user.id, get_message(user.language)(msg_code).format(**kwargs)])
             msg_thread.start()

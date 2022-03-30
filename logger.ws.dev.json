@@ -25,6 +25,11 @@
       "level": "INFO",
       "handlers": ["file_info"],
       "propagate": true
+    },
+    "websocket": {
+      "level": "INFO",
+      "handlers": ["file_info"],
+      "propagate": true
     }
   }
 }

@@ -24,6 +24,11 @@
       "level": "DEBUG",
       "handlers": ["console"],
       "propagate": true
+    },
+    "websocket": {
+      "level": "DEBUG",
+      "handlers": ["console"],
+      "propagate": true
     }
   }
 }

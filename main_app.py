@@ -2,7 +2,6 @@ import os
 import sys
 from src.telesk import Telesk
 from src.main.controller import controller
-from src.main.model import initialize_db
 from src.resources import get_commands
 import logging.config
 import json
@@ -19,5 +18,4 @@ app.config['allow_group'] = False
 app.register_blueprint(controller)
 
 if __name__ == '__main__':
-    initialize_db()
     app.poll()

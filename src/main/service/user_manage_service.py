@@ -4,7 +4,7 @@ from src.resources import get_message
 from src.main.controller.base import controller
 
 
-def user_manage_page_service(chat_id, msg_id, language_code, page, callback_query_id=None):
+def user_manage_page_service(chat_id, msg_id, language_code, page, callback_query_id=None, limit=8, row=4):
     user_info = get_user_info(chat_id)
 
     if user_info != 'NOAUTH':
@@ -17,7 +17,7 @@ def user_manage_page_service(chat_id, msg_id, language_code, page, callback_quer
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.noauth')})
         return
 
-    users = get_users_list(page)
+    users = get_users_list(page, limit)
 
     total = users["paginate"]["total"]
 
@@ -28,12 +28,14 @@ def user_manage_page_service(chat_id, msg_id, language_code, page, callback_quer
 
     user_list = users['list']
 
-    for i in range(8-len(user_list)):
+    for i in range(limit-len(user_list)):
         user_list.append(None)
 
-    for i in range(4):
+    col = int(limit / row)
+
+    for i in range(row):
         row = list()
-        for user in user_list[i * 2:i * 2 + 2]:
+        for user in user_list[i * col:i * col + col]:
             if user:
                 name = user.name
                 if user.is_admin:
@@ -45,7 +47,7 @@ def user_manage_page_service(chat_id, msg_id, language_code, page, callback_quer
 
         inline_keyboard.append(row)
 
-    max_page = (total - 1) // 8
+    max_page = (total - 1) // limit
     if max_page > 0 or page != 0:
         pager_link = list()
         block_page = page // 5

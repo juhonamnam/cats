@@ -13,7 +13,7 @@ en = {
     'start.request.sent': 'Permission request has been sent to the admin. If the admin accept your request, you will be registered to our service.',
     'start.alr_subscribed': 'You are already subscribed to our service.',
     'start.alr_subscribedmess': '{} is already subscribed.',
-    'start.request.acceptmess': '{} is successfully subscribed.',
+    'start.request.acceptmess': '{}\'s request is accepted.',
     'start.request.accept': 'Your subscription is confirmed!!',
     'start.request.rejectmess': '{}\'s request is rejected.',
     'start.requestmess': '{} requested to be subscribed.',
@@ -47,7 +47,7 @@ en = {
     'usermanage.noaccessadm': 'You have no access to other admin',
     'usermanage.alr_admin': 'This user is already an admin',
     'usermanage.prom': 'Promote to admin',
-    'usermanage.susp': 'Suspend this user',
+    'usermanage.susp': 'Suspend',
     # HTML
     'usermanage.default': '<b><u>USER INFO</u></b>\n\n<b>Chat ID:</b> {chat_id}\n<b>Name:</b> {name}\n<b>Language:</b> {language}\n<b>Activity State:</b> {activity_state}',
     'usermanage.prom.confirm': 'Are you sure you want to promote {} to admin?',

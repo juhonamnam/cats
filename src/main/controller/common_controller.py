@@ -23,7 +23,7 @@ def setting_command(chat_id, msg_id, args, callback_info):
 @controller.route('/')
 def edit_name_command(chat_id, text, msg_info):
     reply = msg_info.get('reply_to_message')
-    if reply and reply['text'] in ['Enter new name']:
+    if reply and reply['text'] in ['Enter new name', '새로운 이름을 입력하세요.']:
         language_code = msg_info['from']['language_code']
         msg_id = msg_info['message_id']
         reply_msg_id = reply['message_id']

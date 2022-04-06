@@ -114,7 +114,6 @@ def set_activity_service(chat_id, msg_id, language_code, activity_status: bool, 
         })
 
     else:
-        controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
             'text': get_message(language_code)('com.failed')
@@ -168,7 +167,6 @@ def unsubscribe_service(chat_id, msg_id, language_code, callback_query_id):
         })
 
     else:
-        controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
             'text': get_message(language_code)('com.failed')
@@ -224,7 +222,6 @@ def set_language_service(chat_id, msg_id, language_code, language: str, callback
 
     else:
         language_code = user_info.language
-        controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
             'text': get_message(language_code)('com.failed')
@@ -304,7 +301,6 @@ def edit_name_service(chat_id, msg_id, language_code, new_name, callback_query_i
         })
 
     else:
-        controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
             'text': get_message(language_code)('com.failed')

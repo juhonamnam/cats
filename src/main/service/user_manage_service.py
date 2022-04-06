@@ -235,7 +235,6 @@ def promote_service(chat_id, user_chat_id, msg_id, language_code, callback_query
                 {'chat_id': target_user_info.id, 'text': get_message(language_code)('usermanage.prom.success')})
 
         else:
-            controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict(
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.failed')})
 
@@ -306,6 +305,5 @@ def suspend_service(chat_id, user_chat_id, msg_id, language_code, callback_query
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.success')})
 
         else:
-            controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict(
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.failed')})

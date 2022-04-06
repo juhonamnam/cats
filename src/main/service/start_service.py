@@ -21,7 +21,8 @@ def start_default_service(chat_id, msg_id, first_name, language_code):
         'text': get_message(language_code)('start.default').format(name=first_name),
         'reply_markup': json.dumps({
             'inline_keyboard': inline_keyboard
-        })
+        }),
+        'parse_mode': 'HTML'
     })
 
 
@@ -82,7 +83,6 @@ def subscribe_accept_service(chat_id, msg_id, args, language_code, callback_quer
                 'text': get_message(user_language_code)('start.request.accept')
             })
         else:
-            controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict({
                 'callback_query_id': callback_query_id,
                 'text': get_message(language_code)('com.failed')

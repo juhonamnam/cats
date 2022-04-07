@@ -82,11 +82,11 @@ class UpbitWebsocket:
                                 ((self._curr_prices[ticker] - self._buy_sigs[ticker]['buy_price'])
                                     / self._buy_sigs[ticker]['buy_price'])
                             self._send_tele_message(
-                                'sellsig',
+                                'ws.sell',
                                 ticker=ticker,
                                 sell_price=sell_price,
                                 buy_price=buy_price,
-                                interest=interest
+                                interest=round(interest, 2)
                             )
                             self.logger.info(
                                 f'Sell Signal: {{Ticker: {ticker}, Sell Price: {sell_price}, Buy Price: {buy_price}, Interest: {interest}}}')
@@ -107,7 +107,7 @@ class UpbitWebsocket:
                         f'Buy Signal: {{Ticker:{ticker}, Current Price:{curr_price}}}')
                     self._buy_sigs[ticker]['buy_price'] = curr_price
                     self._send_tele_message(
-                        'buysig', ticker=ticker, curr_price=curr_price)
+                        'ws.buy', ticker=ticker, curr_price=curr_price)
 
                 threading.Thread(target=buy_signal, daemon=True).start()
 
@@ -123,6 +123,11 @@ class UpbitWebsocket:
     def _send_tele_message(self, msg_code, **kwargs):
         users = get_active_users_info()
         for user in users:
-            msg_thread = threading.Thread(target=controller.send_message, args=[
-                                          user.id, get_message(user.language)(msg_code).format(**kwargs)])
+            msg_thread = threading.Thread(
+                target=controller.send_message_with_dict,
+                args=[{
+                    'chat_id': user.id,
+                    'text': get_message(user.language)(msg_code).format(**kwargs),
+                    'parse_mode': 'HTML'
+                }])
             msg_thread.start()

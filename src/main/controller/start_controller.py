@@ -25,11 +25,3 @@ def accept_callback(chat_id, msg_id, args, callback_info):
     language_code = callback_info['from']['language_code']
     service.subscribe_accept_service(
         chat_id, msg_id, args, language_code, callback_query_id)
-
-
-@controller.route('reject', type='callback')
-def reject_callback(chat_id, msg_id, args, callback_info):
-    callback_query_id = callback_info['id']
-    language_code = callback_info['from']['language_code']
-    service.reject_service(chat_id, msg_id, args,
-                           language_code, callback_query_id)

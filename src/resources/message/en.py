@@ -1,23 +1,24 @@
 en = {
     'com.accept': 'Accept',
-    'com.reject': 'Reject',
+    'com.reject': 'Ignore',
     'com.noauth': 'You have no permission.',
-    'com.success': 'Success',
-    'com.failed': 'Failed',
+    'com.success': 'Successfully updated',
+    'com.failed': 'Failed. Try again',
     'com.yes': 'Yes',
     'com.no': 'No',
     'com.exit': 'Exit',
-    'start.default': 'Hello {name}!! This is a test version of cryptocurrency trade algorithm project.\n\nWe provide cryptocurrency trading strategy in real time. Subscribe to our service to take advantage of what we provide.',
-    'start.request': 'Subscribe',
-    'start.request.sent': 'Permission request has been sent to the admin. If the admin accept your request, you will be registered to our service.',
-    'start.alr_subscribed': 'You are already subscribed to our service.',
-    'start.alr_subscribedmess': '{} is alreay subscribed.',
-    'start.request.acceptmess': '{} is successfully subscribed.',
-    'start.request.accept': 'You are successfully subscribed to our service!!\n\nFor more information about our service, use /about command. You can change your setting using /setting command',
-    'start.request.rejectmess': '{}\'s request is rejected.',
-    'start.requestmess': '{} requested to be subscribed.',
     # HTML
-    'setting.default': '<b><u>CURRENT INFO</u></b>\n\n<b>Name:</b> {name}\n<b>Activity State:</b> {activity_state}',
+    'start.default': '<b>Hello {name}!! </b>This is a test version of <i>Cryptocurrency Auto Trade Simulation (CATS)</i> project.\n\nSubscribe to our service to participate.',
+    'start.request': 'Subscribe',
+    'start.request.sent': 'Your subscription request is being processed...',
+    'start.alr_subscribed': 'You are already subscribed to our service.',
+    'start.alr_subscribedmess': '{} is already subscribed.',
+    'start.request.acceptmess': '{}\'s request is accepted.',
+    'start.request.accept': 'Your subscription is confirmed.\nUse /about command to learn more about our service.\nUse /setting command to change your subscription info.',
+    'start.requestmess': 'New subscription request\n\nID: {chat_id}\nName {name}',
+    'about': '<b><u>ABOUT</u></b>\n\nCryptocurrency Auto Trade Simulation (CATS) is a personal project that aims to simulate trading algorithm. Market price data in Upbit Exchange are used to run the trading simulation. Once you subscribe to our service, you will receive simulated transaction messages in real time.\n\n<i>This project does not involve any real transaction. You may perform trading along with the simulation at your own risk, but it doesn\'t guarantee profit.</i>',
+    # HTML
+    'setting.default': '<b><u>SETTING</u></b>\n\n<b>Name:</b> {name}\n<b>Activity State:</b> {activity_state}',
     'setting.activitystate': 'Activity State',
     'setting.unsubscribe': 'Unsubscribe',
     'setting.activate': 'Activate',
@@ -29,7 +30,7 @@ en = {
     # HTML
     'setting.activate.confirm': '<b>Current Activity State: Inactive</b>\n\nWill you activate?',
     # HTML
-    'setting.deactivate.confirm': '<b>Current Activity State: Active</b>\n\nIf you deactivate, you will no longer receive real time buy & sell signals. Will you deactivate?',
+    'setting.deactivate.confirm': '<b>Current Activity State: Active</b>\n\nOnce you deactivate, you will no longer receive auto trading service until you activate again. Will you deactivate?',
     'setting.editname': 'Edit Name',
     # HTML
     'setting.editnameinput': '<i>Enter new name</i>',
@@ -45,23 +46,17 @@ en = {
     'usermanage.noaccessadm': 'You have no access to other admin',
     'usermanage.alr_admin': 'This user is already an admin',
     'usermanage.prom': 'Promote to admin',
-    'usermanage.susp': 'Suspend this user',
+    'usermanage.susp': 'Suspend',
     # HTML
-    'usermanage.default': '<b><u>USER INFO</u></b>\n\n<b>Chat ID:</b> {chat_id}\n<b>Name:</b> {name}\n<b>Language:</b> {language}\n<b>Activity State:</b> {activity_state}',
+    'usermanage.default': '<b><u>USER INFO</u></b>\n\n<b>ID:</b> {chat_id}\n<b>Name:</b> {name}\n<b>Language:</b> {language}\n<b>Activity State:</b> {activity_state}',
     'usermanage.prom.confirm': 'Are you sure you want to promote {} to admin?',
     'usermanage.backtolist': 'Back to user list',
-    'usermanage.prom.success': 'The admin promoted you to an admin. You can now use /user_manage command to manage other users',
+    'usermanage.prom.success': 'You have been promoted to admin.\nUse /user_manage command for user management service',
     'usermanage.susp.option1': 'Suspend',
     'usermanage.susp.option2': 'Suspend and Block',
     'usermanage.susp.confirm': 'Are you sure you want to suspend {}?',
-    'buysig': '\n'.join([
-                '--Buy {ticker}--',
-                'Current Price: {curr_price}'
-    ]),
-    'sellsig': '\n'.join([
-        '--Sell {ticker}--',
-        'Sell Price: {sell_price}',
-        'buy Price: {buy_price}',
-        'Interest: {interest}%'
-    ]),
+    # HTML
+    'ws.buy': '<u><i>Buy {ticker} Now!!</i></u>\nCurrent Price: {curr_price}',
+    # HTML
+    'ws.sell': '<u><i>Sell {ticker} Now!!</i>/<u>\nBuy Price: {buy_price}\nSell Price: {sell_price}\nInterest: <b>{interest}%</b>',
 }

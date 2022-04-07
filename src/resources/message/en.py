@@ -1,6 +1,6 @@
 en = {
     'com.accept': 'Accept',
-    'com.reject': 'Reject',
+    'com.reject': 'Ignore',
     'com.noauth': 'You have no permission.',
     'com.success': 'Successfully updated',
     'com.failed': 'Failed. Try again',
@@ -8,18 +8,17 @@ en = {
     'com.no': 'No',
     'com.exit': 'Exit',
     # HTML
-    'start.default': '<b>Hello {name}!!</b> This is a test version of <i>Cryptocurrency Auto Trade Service (CATS)</i> project.\n\nSubscribe to our service to participate.',
+    'start.default': '<b>Hello {name}!! </b>This is a test version of <i>Cryptocurrency Auto Trade Simulation (CATS)</i> project.\n\nSubscribe to our service to participate.',
     'start.request': 'Subscribe',
-    'start.request.sent': 'Permission request has been sent to the admin. If the admin accept your request, you will be registered to our service.',
+    'start.request.sent': 'Your subscription request is being processed...',
     'start.alr_subscribed': 'You are already subscribed to our service.',
     'start.alr_subscribedmess': '{} is already subscribed.',
     'start.request.acceptmess': '{}\'s request is accepted.',
-    'start.request.accept': 'Your subscription is confirmed!!',
-    'start.request.rejectmess': '{}\'s request is rejected.',
-    'start.requestmess': '{} requested to be subscribed.',
-    'about': '<b><u>ABOUT</u></b>\n\nCryptocurrency Auto Trade Service (CATS) is a personal project that aims to simulate trading algorithm. Real time market prices in Upbit Exchange are used to run the trading simulation. Once you subscribe, you will get messages when the algorithm decides to buy or sell.\n\n<i>This project does not involve any real transaction as it is only a simulation. You may perform trading along with the simulation at your own risk, but it doesn\'t guarantee profit.</i>',
+    'start.request.accept': 'Your subscription is confirmed.\nUse /about command to learn more about our service.\nUse /setting command to change your subscription info.',
+    'start.requestmess': 'New subscription request\n\nID: {chat_id}\nName {name}',
+    'about': '<b><u>ABOUT</u></b>\n\nCryptocurrency Auto Trade Simulation (CATS) is a personal project that aims to simulate trading algorithm. Market price data in Upbit Exchange are used to run the trading simulation. Once you subscribe to our service, you will receive simulated transaction messages in real time.\n\n<i>This project does not involve any real transaction. You may perform trading along with the simulation at your own risk, but it doesn\'t guarantee profit.</i>',
     # HTML
-    'setting.default': '<b><u>CURRENT INFO</u></b>\n\n<b>Name:</b> {name}\n<b>Activity State:</b> {activity_state}',
+    'setting.default': '<b><u>SETTING</u></b>\n\n<b>Name:</b> {name}\n<b>Activity State:</b> {activity_state}',
     'setting.activitystate': 'Activity State',
     'setting.unsubscribe': 'Unsubscribe',
     'setting.activate': 'Activate',
@@ -49,15 +48,15 @@ en = {
     'usermanage.prom': 'Promote to admin',
     'usermanage.susp': 'Suspend',
     # HTML
-    'usermanage.default': '<b><u>USER INFO</u></b>\n\n<b>Chat ID:</b> {chat_id}\n<b>Name:</b> {name}\n<b>Language:</b> {language}\n<b>Activity State:</b> {activity_state}',
+    'usermanage.default': '<b><u>USER INFO</u></b>\n\n<b>ID:</b> {chat_id}\n<b>Name:</b> {name}\n<b>Language:</b> {language}\n<b>Activity State:</b> {activity_state}',
     'usermanage.prom.confirm': 'Are you sure you want to promote {} to admin?',
     'usermanage.backtolist': 'Back to user list',
-    'usermanage.prom.success': 'You have been promoted to admin. You can now use /user_manage command to manage other users',
+    'usermanage.prom.success': 'You have been promoted to admin.\nUse /user_manage command for user management service',
     'usermanage.susp.option1': 'Suspend',
     'usermanage.susp.option2': 'Suspend and Block',
     'usermanage.susp.confirm': 'Are you sure you want to suspend {}?',
     # HTML
-    'ws.buy': '<i>Buy {ticker} Now!!</i>\nCurrent Price: {curr_price}',
+    'ws.buy': '<u><i>Buy {ticker} Now!!</i></u>\nCurrent Price: {curr_price}',
     # HTML
-    'ws.sell': '<i>Sell {ticker} Now!!</i>\nBuy Price: {buy_price}\nSell Price: {sell_price}\nInterest: <b>{interest}%</b>',
+    'ws.sell': '<u><i>Sell {ticker} Now!!</i>/<u>\nBuy Price: {buy_price}\nSell Price: {sell_price}\nInterest: <b>{interest}%</b>',
 }

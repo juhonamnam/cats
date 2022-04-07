@@ -86,7 +86,7 @@ class UpbitWebsocket:
                                 ticker=ticker,
                                 sell_price=sell_price,
                                 buy_price=buy_price,
-                                interest=interest
+                                interest=round(interest, 2)
                             )
                             self.logger.info(
                                 f'Sell Signal: {{Ticker: {ticker}, Sell Price: {sell_price}, Buy Price: {buy_price}, Interest: {interest}}}')

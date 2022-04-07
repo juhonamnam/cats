@@ -23,14 +23,14 @@ ko = {
     'setting.unsubscribe': '구독 취소',
     'setting.activate': '활성화',
     'setting.deactivate': '비활성화',
-    'setting.active': 'Active',
-    'setting.inactive': 'Inactive',
+    'setting.active': '사용중',
+    'setting.inactive': '사용중지',
     # HTML
     'setting.backtosetting': '설정으로 돌아가기',
     # HTML
-    'setting.activate.confirm': '<b>현재 활동 상태: Inactive</b>\n\n활성화하시겠습니까?',
+    'setting.activate.confirm': '<b>현재 활동 상태: 사용중지</b>\n\n활성화하시겠습니까?',
     # HTML
-    'setting.deactivate.confirm': '<b>현재 활동 상태: Active</b>\n\n비활성화하면 다시 활성화하기 전까지 자동 매매 서비스를 받으실 수 없습니다. 비활성화하시겠습니까?',
+    'setting.deactivate.confirm': '<b>현재 활동 상태: 사용중</b>\n\n비활성화하면 다시 활성화하기 전까지 자동 매매 서비스를 받으실 수 없습니다. 비활성화하시겠습니까?',
     'setting.editname': '이름 변경',
     # HTML
     'setting.editnameinput': '<i>새로운 이름을 입력하세요.</i>',

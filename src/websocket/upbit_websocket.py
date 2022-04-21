@@ -29,7 +29,7 @@ class UpbitWebsocket:
         self._process_message(msg)
 
     def _on_error(self, ws, error):
-        self.logger.exception(error)
+        self.logger.error(str(error))
 
     def _on_close(self, ws, close_status_code, close_msg):
         self.logger.error(

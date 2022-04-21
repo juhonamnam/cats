@@ -18,7 +18,7 @@
       "class": "logging.FileHandler",
       "level": "ERROR",
       "formatter": "basic",
-      "filename": "telesk_app_dev_log.log"
+      "filename": "telesk_app_dev_error.log"
     }
   },
   "loggers": {

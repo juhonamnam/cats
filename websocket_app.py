@@ -12,7 +12,7 @@ else:
     logging.config.dictConfig(json.load(open('./logger.local.json')))
 
 telesk_app = Telesk()
-telesk_app.config['api_key'] = os.getenv('cats_tele_key')
+telesk_app.config['api_key'] = os.getenv('CATS_TELE_KEY')
 telesk_app.register_blueprint(controller)
 
 ws = UpbitWebsocket(

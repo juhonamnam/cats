@@ -1,10 +1,10 @@
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from env import sql_url
 
 Base = declarative_base()
-engine = create_engine(
-    'sqlite:///test.db?check_same_thread=False')
+engine = create_engine(sql_url)
 
 
 class Users(Base):

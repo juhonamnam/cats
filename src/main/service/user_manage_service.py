@@ -225,9 +225,9 @@ def promote_service(chat_id, user_chat_id, msg_id, language_code, callback_query
             {'callback_query_id': callback_query_id, 'text': get_message(language_code)('usermanage.alr_admin')})
 
     else:
-        responsecode = update_user(user_chat_id, is_admin=True)
+        response = update_user(user_chat_id, is_admin=True)
 
-        if responsecode == '0000':
+        if response['ok']:
             controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict(
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.success')})
@@ -297,9 +297,9 @@ def suspend_service(chat_id, user_chat_id, msg_id, language_code, callback_query
             {'callback_query_id': callback_query_id, 'text': get_message(language_code)('usermanage.noaccessadm')})
 
     else:
-        responsecode = delete_user(user_chat_id)
+        response = delete_user(user_chat_id)
 
-        if responsecode == '0000':
+        if response['ok']:
             controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict(
                 {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.success')})

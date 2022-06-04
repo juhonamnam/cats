@@ -29,6 +29,11 @@
       "level": "DEBUG",
       "handlers": ["console"],
       "propagate": true
+    },
+    "model": {
+      "level": "DEBUG",
+      "handlers": ["console"],
+      "propagate": true
     }
   }
 }

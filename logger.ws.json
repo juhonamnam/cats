@@ -12,13 +12,13 @@
       "class": "logging.FileHandler",
       "level": "INFO",
       "formatter": "basic",
-      "filename": "telesk_app_dev.log"
+      "filename": "ws_app.log"
     },
     "file_error": {
       "class": "logging.FileHandler",
       "level": "ERROR",
       "formatter": "basic",
-      "filename": "telesk_app_dev_error.log"
+      "filename": "ws_app_error.log"
     }
   },
   "loggers": {
@@ -28,6 +28,16 @@
       "propagate": true
     },
     "sqlalchemy.engine": {
+      "level": "INFO",
+      "handlers": ["file_info", "file_error"],
+      "propagate": true
+    },
+    "websocket": {
+      "level": "INFO",
+      "handlers": ["file_info", "file_error"],
+      "propagate": true
+    },
+    "model": {
       "level": "INFO",
       "handlers": ["file_info", "file_error"],
       "propagate": true

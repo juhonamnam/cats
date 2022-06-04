@@ -12,13 +12,13 @@
       "class": "logging.FileHandler",
       "level": "INFO",
       "formatter": "basic",
-      "filename": "websocket_app_dev.log"
+      "filename": "main_app.log"
     },
     "file_error": {
       "class": "logging.FileHandler",
       "level": "ERROR",
       "formatter": "basic",
-      "filename": "websocket_app_dev_error.log"
+      "filename": "main_app_error.log"
     }
   },
   "loggers": {
@@ -32,7 +32,7 @@
       "handlers": ["file_info", "file_error"],
       "propagate": true
     },
-    "websocket": {
+    "model": {
       "level": "INFO",
       "handlers": ["file_info", "file_error"],
       "propagate": true

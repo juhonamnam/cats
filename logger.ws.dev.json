@@ -36,6 +36,11 @@
       "level": "INFO",
       "handlers": ["file_info", "file_error"],
       "propagate": true
+    },
+    "model": {
+      "level": "INFO",
+      "handlers": ["file_info", "file_error"],
+      "propagate": true
     }
   }
 }

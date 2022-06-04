@@ -69,9 +69,9 @@ def subscribe_accept_service(chat_id, msg_id, args, language_code, callback_quer
     new_user_info = get_user_info(new_user_chat_id)
     if new_user_info == 'NOAUTH':
 
-        responsecode = new_user(
+        response = new_user(
             new_user_chat_id, first_name, language=user_language_code)
-        if responsecode == '0000':
+        if response['ok']:
             controller.delete_message_thread(chat_id, msg_id)
             controller.answer_callback_query_with_dict({
                 'callback_query_id': callback_query_id,

@@ -104,9 +104,9 @@ def set_activity_service(chat_id, msg_id, language_code, activity_status: bool, 
 
     language_code = user_info.language
 
-    responsecode = update_user(chat_id, is_active=activity_status)
+    response = update_user(chat_id, is_active=activity_status)
 
-    if responsecode == '0000':
+    if response['ok']:
         controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
@@ -157,9 +157,9 @@ def unsubscribe_service(chat_id, msg_id, language_code, callback_query_id):
 
     language_code = user_info.language
 
-    responescode = delete_user(chat_id)
+    respones = delete_user(chat_id)
 
-    if responescode == '0000':
+    if respones['ok']:
         controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,
@@ -210,9 +210,9 @@ def set_language_service(chat_id, msg_id, language_code, language: str, callback
             {'callback_query_id': callback_query_id, 'text': get_message(language_code)('com.noauth')})
         return
 
-    responsecode = update_user(chat_id, language=language)
+    response = update_user(chat_id, language=language)
 
-    if responsecode == '0000':
+    if response['ok']:
         language_code = language
         controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
@@ -291,9 +291,9 @@ def edit_name_service(chat_id, msg_id, language_code, new_name, callback_query_i
 
     language_code = user_info.language
 
-    responsecode = update_user(chat_id, name=new_name)
+    response = update_user(chat_id, name=new_name)
 
-    if responsecode == '0000':
+    if response['ok']:
         controller.delete_message_thread(chat_id, msg_id)
         controller.answer_callback_query_with_dict({
             'callback_query_id': callback_query_id,

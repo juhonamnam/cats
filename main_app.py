@@ -6,10 +6,10 @@ from src.resources import get_commands
 import logging.config
 import json
 
-if len(sys.argv) > 1 and sys.argv[1] == 'dev':
-    logging.config.dictConfig(json.load(open('./logger.main.dev.json')))
+if len(sys.argv) > 1 and sys.argv[1] == 'production':
+    logging.config.dictConfig(json.load(open('./logger.main.json')))
 else:
-    logging.config.dictConfig(json.load(open('./logger.local.json')))
+    logging.config.dictConfig(json.load(open('./logger.dev.json')))
 
 app = Telesk()
 app.config['api_key'] = api_key

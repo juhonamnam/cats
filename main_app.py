@@ -1,12 +1,11 @@
-from env import api_key
-import sys
+from env import api_key, is_production
 from src.telesk import Telesk
 from src.main.controller import controller
 from src.resources import get_commands
 import logging.config
 import json
 
-if len(sys.argv) > 1 and sys.argv[1] == 'production':
+if is_production:
     logging.config.dictConfig(json.load(open('./logger.main.json')))
 else:
     logging.config.dictConfig(json.load(open('./logger.dev.json')))

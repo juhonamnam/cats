@@ -8,11 +8,5 @@ __pycache__/
 # Virtual Env
 /.venv
 
-# sqlite
-*.db
-
 # log
 *.log
-
-# env
-*.env

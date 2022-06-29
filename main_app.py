@@ -4,6 +4,12 @@ from src.main.controller import controller
 from src.resources import get_commands
 import logging.config
 import json
+import signal
+
+def handle_sigterm(*args):
+    raise KeyboardInterrupt()
+
+signal.signal(signal.SIGTERM, handle_sigterm)
 
 if is_production:
     logging.config.dictConfig(json.load(open('./logger.main.json')))

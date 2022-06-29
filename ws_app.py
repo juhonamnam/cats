@@ -4,6 +4,12 @@ from src.websocket.upbit_websocket import UpbitWebsocket
 from src.main.controller.base import controller
 import logging.config
 import json
+import signal
+
+def handle_sigterm(*args):
+    raise KeyboardInterrupt()
+
+signal.signal(signal.SIGTERM, handle_sigterm)
 
 if is_production:
     logging.config.dictConfig(json.load(open('./logger.ws.json')))

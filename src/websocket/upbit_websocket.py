@@ -44,17 +44,28 @@ class UpbitWebsocket:
         ws.send(json.dumps(
             [{"ticket": "test"}, {"type": "ticker", "codes": self._tickers}]))
 
+    def _run(self):
+        url = "wss://api.upbit.com/websocket/v1"
+        ws = websocket.WebSocketApp(url,
+                                    on_open=self._on_open,
+                                    on_message=self._on_message,
+                                    on_error=self._on_error,
+                                    on_close=self._on_close,)
+        while True:
+            ws.run_forever()
+            time.sleep(10)
+
     def run(self):
+
         try:
-            url = "wss://api.upbit.com/websocket/v1"
-            ws = websocket.WebSocketApp(url,
-                                        on_open=self._on_open,
-                                        on_message=self._on_message,
-                                        on_error=self._on_error,
-                                        on_close=self._on_close,)
+            run_thread = threading.Thread(
+                target=self._run,
+                daemon=True
+            )
+
+            run_thread.start()
             while True:
-                ws.run_forever()
-                time.sleep(10)
+                time.sleep(100000)
         except KeyboardInterrupt:
             self.logger.info('Upbit Websocket End')
             exit()

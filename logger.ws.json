@@ -12,13 +12,13 @@
       "class": "logging.FileHandler",
       "level": "INFO",
       "formatter": "basic",
-      "filename": "ws_app.log"
+      "filename": "./logs/ws_app.log"
     },
     "file_error": {
       "class": "logging.FileHandler",
       "level": "ERROR",
       "formatter": "basic",
-      "filename": "ws_app_error.log"
+      "filename": "./logs/ws_app_error.log"
     }
   },
   "loggers": {

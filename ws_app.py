@@ -6,8 +6,10 @@ import logging.config
 import json
 import signal
 
+
 def handle_sigterm(*args):
     raise KeyboardInterrupt()
+
 
 signal.signal(signal.SIGTERM, handle_sigterm)
 

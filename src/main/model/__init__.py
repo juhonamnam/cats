@@ -7,6 +7,11 @@ def initialize_db():
 
 
 @model_decorator
+def user_count(session=None):
+    return session.query(func.count(Users.id)).scalar()
+
+
+@model_decorator
 def new_user(id: int, name: str, is_admin: bool = False, language: str = 'en', session=None):
 
     user = Users(id=id, name=name, is_admin=is_admin, language=language)

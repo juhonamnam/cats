@@ -12,13 +12,13 @@
       "class": "logging.FileHandler",
       "level": "INFO",
       "formatter": "basic",
-      "filename": "main_app.log"
+      "filename": "./logs/main_app.log"
     },
     "file_error": {
       "class": "logging.FileHandler",
       "level": "ERROR",
       "formatter": "basic",
-      "filename": "main_app_error.log"
+      "filename": "./logs/main_app_error.log"
     }
   },
   "loggers": {

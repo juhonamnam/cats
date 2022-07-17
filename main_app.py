@@ -1,5 +1,4 @@
 from env import api_key, is_production
-from initialize import initialize
 from src.telesk import Telesk
 from src.main.controller import controller
 from src.resources import get_commands
@@ -26,5 +25,4 @@ app.config['allow_group'] = False
 app.register_blueprint(controller)
 
 if __name__ == '__main__':
-    initialize()
     app.poll()

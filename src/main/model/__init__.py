@@ -1,9 +1,5 @@
 from sqlalchemy import func
-from .base import Base, engine, Users, model_decorator
-
-
-def initialize_db():
-    Base.metadata.create_all(engine)
+from .base import Users, model_decorator
 
 
 @model_decorator

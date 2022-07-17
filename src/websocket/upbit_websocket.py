@@ -55,7 +55,7 @@ class UpbitWebsocket:
             ws.run_forever()
             time.sleep(10)
 
-    def run(self):
+    def run(self, on_disconnect=None):
 
         try:
             run_thread = threading.Thread(
@@ -67,6 +67,8 @@ class UpbitWebsocket:
             while True:
                 time.sleep(100000)
         except KeyboardInterrupt:
+            if on_disconnect:
+                on_disconnect()
             self.logger.info('Upbit Websocket End')
             exit()
 

@@ -1,7 +1,8 @@
-from env import api_key, is_production
+from env import api_key, is_production, sql_url
 from src.telesk import Telesk
 from src.websocket.upbit_websocket import UpbitWebsocket
 from src.main.controller.base import controller
+from src.main.model.base import db
 import logging.config
 import json
 import signal
@@ -26,4 +27,5 @@ ws = UpbitWebsocket(
     ['KRW-BTC', 'KRW-ETH', 'KRW-EOS', 'KRW-BCH'])
 
 if __name__ == '__main__':
-    ws.run()
+    db.open(sql_url=sql_url)
+    ws.run(on_disconnect=db.close)

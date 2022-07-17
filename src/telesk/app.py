@@ -159,7 +159,7 @@ class Telesk(Scaffold):
                 self.logger.error(str(e))
                 time.sleep(_cooldown)
 
-    def poll(self, poll_timeout=None, cooldown=None):
+    def poll(self, poll_timeout=None, cooldown=None, on_disconnect=None):
 
         try:
             self.logger.info('Telesk Server Getting Ready...')
@@ -179,6 +179,8 @@ class Telesk(Scaffold):
             while True:
                 time.sleep(100000)
         except KeyboardInterrupt:
+            if on_disconnect:
+                on_disconnect()
             self.logger.info('Telesk Server End')
             exit()
         except Exception as e:

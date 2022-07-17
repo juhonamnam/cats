@@ -1,7 +1,8 @@
-from env import api_key, is_production
+from env import api_key, is_production, sql_url
 from src.telesk import Telesk
 from src.main.controller import controller
 from src.resources import get_commands
+from src.main.model.base import db
 import logging.config
 import json
 import signal
@@ -25,4 +26,5 @@ app.config['allow_group'] = False
 app.register_blueprint(controller)
 
 if __name__ == '__main__':
-    app.poll()
+    db.open(sql_url)
+    app.poll(on_disconnect=db.close)

@@ -30,6 +30,7 @@ docker build \
     -f Dockerfile.production \
     --tag $APP_NAME:$APP_VERSION .
 
+RUN_1="""
 docker run \
     --name $APP_NAME-main \
     -e TELE_KEY=$TELE_KEY \
@@ -37,7 +38,11 @@ docker run \
     --network $NETWORK_NAME \
     -v $(pwd)/logs:/app/logs \
     -d $APP_NAME:$APP_VERSION main_app.py production
+"""
+echo $RUN_1
+echo $($RUN_1)
 
+RUN_2="""
 docker run \
     --name $APP_NAME-ws \
     -e TELE_KEY=$TELE_KEY \
@@ -45,3 +50,6 @@ docker run \
     --network $NETWORK_NAME \
     -v $(pwd)/logs:/app/logs \
     -d $APP_NAME:$APP_VERSION ws_app.py production
+"""
+echo $RUN_2
+echo $($RUN_2)

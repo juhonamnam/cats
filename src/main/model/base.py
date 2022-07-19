@@ -1,41 +1,28 @@
-from sqlalchemy import create_engine, Column, Integer, String, Boolean
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from env import sql_url
 import logging
 
-Base = declarative_base()
 engine = create_engine(sql_url)
 logger = logging.getLogger('model')
 
 
-class Users(Base):
+class SQLConnection:
+    def __init__(self):
+        self.engine = None
+        self.Session = None
+        self.logger = logging.getLogger('model')
 
-    __tablename__ = 'users'
+    def open(self, sql_url):
+        self.engine = create_engine(sql_url)
+        self.Session = sessionmaker(autocommit=False, bind=self.engine)
+        self.engine.connect()
+        self.logger.info('SQL Connected')
 
-    id = Column(Integer, primary_key=True)
-    name = Column(String(20))
-    language = Column(String(3))
-    is_admin = Column(Boolean, default=False)
-    is_active = Column(Boolean, default=True)
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    def close(self):
+        self.Session.close_all()
+        self.engine.dispose()
+        self.logger.info("SQL Disconnected")
 
 
-def model_decorator(model_function):
-    def wrapper_function(*args, **kwargs):
-        Session = sessionmaker(bind=engine)
-        session = Session()
-
-        try:
-            result = model_function(*args, **kwargs, session=session)
-        except Exception as e:
-            logger.error(str(e))
-            result = {'ok': False, 'description': e.__str__()}
-
-        session.close()
-
-        return result
-
-    return wrapper_function
+db = SQLConnection()

@@ -33,8 +33,6 @@ docker build \
 docker run \
     --name $APP_NAME-main \
     -e TELE_KEY=$TELE_KEY \
-    -e INITIAL_ADMIN_ID=$INITIAL_ADMIN_ID \
-    -e INITIAL_ADMIN_NAME=$INITIAL_ADMIN_NAME \
     -e SQL_URL=$SQL_URL \
     --network $NETWORK_NAME \
     -v $(pwd)/logs:/app/logs \

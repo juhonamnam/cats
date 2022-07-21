@@ -14,7 +14,7 @@ class SQLConnection:
         self.logger = logging.getLogger('model')
 
     def open(self, sql_url):
-        self.engine = create_engine(sql_url)
+        self.engine = create_engine(sql_url, pool_recycle=27000)
         self.Session = sessionmaker(autocommit=False, bind=self.engine)
         self.engine.connect()
         self.logger.info('SQL Connected')

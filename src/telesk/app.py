@@ -12,10 +12,11 @@ class Telesk(Scaffold):
 
         self.config = dict(
             api_key=None,
-            poll_timeout=600,
+            timeout=600,
             cool_down=60,
             commands=[],
-            allow_group=True
+            allow_group=True,
+            one_user=None
         )
         self.bot_info = dict()
         self._offset = 0
@@ -35,6 +36,7 @@ class Telesk(Scaffold):
         blueprint.delete_message_thread = self.delete_message_thread
         blueprint.answer_callback_query = self.answer_callback_query
         blueprint.answer_callback_query_with_dict = self.answer_callback_query_with_dict
+        blueprint.config = self.config
 
         for bp in blueprint._blueprints:
             self.register_blueprint(bp)
@@ -62,13 +64,20 @@ class Telesk(Scaffold):
                 is_group = msg_info['chat']['type'] == 'group'
 
                 if is_group and not self.config['allow_group']:
-                    self.logger.info(f'Message Received (Disallowed by Group Message Config): {str(msg)}')
+                    self.logger.info(
+                        f'Message Received (Disallowed by Group Message Config): {str(msg)}')
+                    return
+
+                chat_id = msg_info.get('chat', {}).get('id')
+
+                if self.config['one_user'] and self.config['one_user'] != str(chat_id):
+                    self.logger.info(
+                        f'Message Received (Disallowed by One User Message Config): {str(msg)}')
                     return
 
                 self.logger.info(f'Message Received: {str(msg)}')
 
                 text: str = msg_info.get('text', '')
-                chat_id = msg_info.get('chat', {}).get('id')
 
                 if text.startswith('/'):
                     splited = text.split(' ')
@@ -132,7 +141,7 @@ class Telesk(Scaffold):
             raise Exception("config api_key is undefined")
         response = self._get_me()
         if not response.get('ok', False):
-            raise Exception(self.bot_info.get('description'))
+            raise Exception(response.get('description'))
         self.bot_info = response['result']
 
     def _set_bot_commands_options(self):
@@ -159,20 +168,19 @@ class Telesk(Scaffold):
                 self.logger.error(str(e))
                 time.sleep(_cooldown)
 
-    def poll(self, poll_timeout=None, cooldown=None, on_disconnect=None):
+    def poll(self, on_disconnect=None):
 
         try:
             self.logger.info('Telesk Server Getting Ready...')
             self._verify_api_key()
             self._set_bot_commands_options()
             self._set_initial_offset()
-            _poll_timeout = poll_timeout or self.config.get(
-                'poll_timeout', 600)
-            _cooldown = cooldown or self.config.get('cooldown', 60)
+            poll_timeout = self.config.get('timeout', 600)
+            cooldown = self.config.get('cooldown', 60)
             self.logger.info('Telesk Server Start')
             poll_thread = Thread(
                 target=self._poll,
-                args=(_poll_timeout, _cooldown),
+                args=(poll_timeout, cooldown),
                 daemon=True
             )
             poll_thread.start()
@@ -195,7 +203,8 @@ class Telesk(Scaffold):
         try:
             response = method(endpoint,
                               data=kwargs.get('data', None),
-                              params=kwargs.get('params', {}))
+                              params=kwargs.get('params', {}),
+                              timeout=self.config.get('timeout', 600))
 
             return response.json()
         except requests.exceptions.ConnectionError:
